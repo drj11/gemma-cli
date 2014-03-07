@@ -1,5 +1,5 @@
-Gemma0
-======
+Gemma CLI
+=========
 
 This is an example of how to program an ATtiny using command
 line tools.
