@@ -1,11 +1,13 @@
+#include <stdint.h>
+
 #define M_BEGIN do {
 #define M_END } while(0)
 
 #define BIT_SET(P, B) M_BEGIN \
-  *(volatile unsigned char *)(P) |= (1u << (B)); \
+  *(volatile uint8_t *)(P) |= (1u << (B)); \
   M_END
 #define BIT_CLR(P, B) M_BEGIN \
-  *(volatile unsigned char *)(P) &=~ (1u << (B)); \
+  *(volatile uint8_t *)(P) &=~ (1u << (B)); \
   M_END
 
 /*
@@ -15,9 +17,9 @@ These are SRAM addresses, recall SRAM address = IO address + 0x20.
 #define DDRB (0x37)
 
 void
-delay(unsigned int i) {
+delay(uint16_t i) {
   do {
-    unsigned int n = 2000;
+    uint16_t n = 2000;
     __asm__ __volatile__ (
       "1: sbiw %0,1" "\n\t" // 2 cycles
       "brne 1b" : "=w" (n) : "0" (n) // 2 cycles
