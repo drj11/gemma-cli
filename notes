@@ -1,0 +1,15 @@
+# Compile
+
+```
+avr-gcc -mmcu=attiny85 -c -Os main.c
+avr-gcc -Os -Wl,--gc-sections -mmcu=attiny85 -o foo.elf *.o
+avr-objcopy -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0 foo.elf foo.eep # eeprom
+avr-objcopy -O ihex -R .eeprom foo.elf foo.hex # code
+```
+
+# Program
+
+Press reset and...
+```
+avrdude -pattiny85 -cusbtiny -Uflash:w:duty_high.hex
+```
